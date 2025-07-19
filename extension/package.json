@@ -1,0 +1,38 @@
+{
+  "name": "ht6-extension",
+  "version": "0.0.1",
+  "main": "out/extension.js",
+  "scripts": {
+    "compile": "tsc",
+    "watch": "tsc -w"
+  },
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "activationEvents": ["onView:devdoc.panel"],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "devdoc",
+          "title": "DevDoc",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "devdoc": [
+        {
+          "id": "devdoc.panel",
+          "name": "DevDoc",
+          "type": "webview"
+        }
+      ]
+    }
+  },
+  "devDependencies": {
+    "typescript": "^5",
+    "@types/node": "^20",
+    "@types/vscode": "^1.75.0"
+  }
+}

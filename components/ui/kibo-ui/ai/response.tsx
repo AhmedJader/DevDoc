@@ -129,10 +129,14 @@ const components: Options["components"] = {
         data={data}
         defaultValue={data[0].language}
       >
-        <CodeBlockHeader>
+        <CodeBlockHeader className="bg-transparent">
           <CodeBlockFiles>
             {(item) => (
-              <CodeBlockFilename key={item.language} value={item.language}>
+              <CodeBlockFilename
+                key={item.language}
+                value={item.language}
+                className="bg-transparent!"
+              >
                 {item.filename}
               </CodeBlockFilename>
             )}

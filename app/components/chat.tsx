@@ -1,19 +1,21 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-let vscode: ReturnType<typeof acquireVsCodeApi> | undefined;
+// let vscode: ReturnType<typeof acquireVsCodeApi> | undefined;
 
-if (typeof window !== 'undefined') {
-  vscode = acquireVsCodeApi();
-}
+// if (typeof window !== 'undefined') {
+//   vscode = acquireVsCodeApi();
+// }
 
 export default function Chat() {
-  const [input, setInput] = useState('');
-  const [messages, setMessages] = useState<{ role: string; content: string }[]>([]);
+  const [input, setInput] = useState("");
+  const [messages, setMessages] = useState<{ role: string; content: string }[]>(
+    []
+  );
   const [loading, setLoading] = useState(false);
 
-  const sendMessage = () => {
+  /* const sendMessage = () => {
     if (!input.trim() || !vscode) return;
 
     const userMessage = { role: 'user', content: input };
@@ -44,7 +46,7 @@ export default function Chat() {
 
     window.addEventListener('message', listener);
     return () => window.removeEventListener('message', listener);
-  }, []);
+  }, []); */
 
   return (
     <div className="flex flex-col h-full w-full gap-2">
@@ -53,7 +55,9 @@ export default function Chat() {
           <div
             key={i}
             className={`p-2 rounded-md max-w-[80%] ${
-              msg.role === 'user' ? 'bg-blue-500 ml-auto' : 'bg-gray-700 mr-auto'
+              msg.role === "user"
+                ? "bg-blue-500 ml-auto"
+                : "bg-gray-700 mr-auto"
             }`}
           >
             {msg.content}
@@ -64,7 +68,7 @@ export default function Chat() {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          sendMessage();
+          // sendMessage();
         }}
         className="flex gap-2 mt-auto"
       >
@@ -75,7 +79,10 @@ export default function Chat() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
-        <button type="submit" className="px-4 bg-blue-600 text-white rounded-md">
+        <button
+          type="submit"
+          className="px-4 bg-blue-600 text-white rounded-md"
+        >
           Send
         </button>
       </form>

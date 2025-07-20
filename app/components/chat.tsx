@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   AIInput,
   AIInputButton,
@@ -16,11 +16,10 @@ import {
 } from "@/components/ui/kibo-ui/ai/input";
 import { GlobeIcon, MicIcon, PlusIcon } from "lucide-react";
 
-// let vscode: ReturnType<typeof acquireVsCodeApi> | undefined;
-
-// if (typeof window !== 'undefined') {
-//   vscode = acquireVsCodeApi();
-// }
+let vscode: ReturnType<typeof acquireVsCodeApi> | undefined;
+if (typeof window !== "undefined") {
+  vscode = acquireVsCodeApi();
+}
 
 const models = [
   { id: "gpt-4", name: "GPT-4" },
@@ -37,40 +36,22 @@ const models = [
 export default function Chat() {
   const [input, setInput] = useState("");
   const [model, setModel] = useState("gpt-3.5-turbo");
-  const [messages, setMessages] = useState<{ role: string; content: string }[]>(
-    []
-  );
+  const [messages, setMessages] = useState<{ role: string; content: string }[]>([]);
   const [loading, setLoading] = useState(false);
-  const [text, setText] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    /* const handle = async () => {
-      setLoading(true);
-      setInput("");
-
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      // Here you would typically send the message to your backend or API
-      const userMessage = { role: "user", content: input };
-      setMessages((prev) => [...prev, userMessage]);
-    };
-
-    handle(); */
-  };
-
-  /* const sendMessage = () => {
+  const sendMessage = () => {
     if (!input.trim() || !vscode) return;
 
-    const userMessage = { role: 'user', content: input };
+    const userMessage = { role: "user", content: input };
     setMessages((prev) => [...prev, userMessage]);
-    setInput('');
+    setInput("");
     setLoading(true);
 
     vscode.postMessage({
-      type: 'ask-openai',
+      type: "ask-openai",
       value: {
         messages: [
-          { role: 'system', content: 'You are a helpful DevDoc assistant.' },
+          { role: "system", content: "You are a helpful DevDoc assistant." },
           ...messages,
           userMessage,
         ],
@@ -78,38 +59,40 @@ export default function Chat() {
     });
   };
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    sendMessage();
+  };
+
   useEffect(() => {
     const listener = (event: MessageEvent) => {
       const { type, value } = event.data;
-      if (type === 'openai-response') {
-        setMessages((prev) => [...prev, { role: 'assistant', content: value }]);
+      if (type === "openai-response") {
+        setMessages((prev) => [...prev, { role: "assistant", content: value }]);
         setLoading(false);
       }
     };
 
-    window.addEventListener('message', listener);
-    return () => window.removeEventListener('message', listener);
-  }, []); */
+    window.addEventListener("message", listener);
+    return () => window.removeEventListener("message", listener);
+  }, []);
 
   return (
-    <>
-      <div className="flex flex-col h-full w-full gap-2">
-        <div className="flex-1 overflow-y-auto space-y-2">
-          {messages.length > 0 ? (
-            messages.map((msg, i) => (
-              <div
-                key={i}
-                className={`p-2 rounded-md max-w-[80%] ${
-                  msg.role === "user"
-                    ? "bg-blue-500 ml-auto"
-                    : "bg-gray-700 mr-auto"
-                }`}
-              >
-                {msg.content}
-              </div>
-            ))
-          ) : (
-            <div className="flex items-center justify-center flex-col h-full">
+    <div className="flex flex-col h-full w-full gap-2">
+      <div className="flex-1 overflow-y-auto space-y-2">
+        {messages.length > 0 ? (
+          messages.map((msg, i) => (
+            <div
+              key={i}
+              className={`p-2 rounded-md max-w-[80%] ${
+                msg.role === "user" ? "bg-blue-500 ml-auto" : "bg-gray-700 mr-auto"
+              }`}
+            >
+              {msg.content}
+            </div>
+          ))
+        ) : (
+          <div className="flex items-center justify-center flex-col h-full">
               <div className="w-36 h-36 mb-2">
                 <svg
                   viewBox="0 0 48 48"
@@ -144,43 +127,32 @@ export default function Chat() {
                 leaving your development environment.
               </p>
             </div>
-          )}
-          {loading && <div className="text-sm text-gray-400">Thinking...</div>}
-        </div>
-        <AIInput onSubmit={handleSubmit}>
-          <AIInputTextarea
-            onChange={(e: any) => setText(e.target.value)}
-            value={text}
-          />
-          <AIInputToolbar>
-            <AIInputTools>
-              <AIInputButton>
-                <PlusIcon size={16} />
-              </AIInputButton>
-              <AIInputButton>
-                <MicIcon size={16} />
-              </AIInputButton>
-              <AIInputButton>
-                <GlobeIcon size={16} />
-                <span>Search</span>
-              </AIInputButton>
-              <AIInputModelSelect onValueChange={setModel} value={model}>
-                <AIInputModelSelectTrigger>
-                  <AIInputModelSelectValue />
-                </AIInputModelSelectTrigger>
-                <AIInputModelSelectContent>
-                  {models.map((model) => (
-                    <AIInputModelSelectItem key={model.id} value={model.id}>
-                      {model.name}
-                    </AIInputModelSelectItem>
-                  ))}
-                </AIInputModelSelectContent>
-              </AIInputModelSelect>
-            </AIInputTools>
-            <AIInputSubmit disabled={!text} />
-          </AIInputToolbar>
-        </AIInput>
+        )}
+        {loading && <div className="text-sm text-gray-400">Thinking...</div>}
       </div>
-    </>
+      <AIInput onSubmit={handleSubmit}>
+        <AIInputTextarea onChange={(e: any) => setInput(e.target.value)} value={input} />
+        <AIInputToolbar>
+          <AIInputTools>
+            <AIInputButton><PlusIcon size={16} /></AIInputButton>
+            <AIInputButton><MicIcon size={16} /></AIInputButton>
+            <AIInputButton><GlobeIcon size={16} /><span>Search</span></AIInputButton>
+            <AIInputModelSelect onValueChange={setModel} value={model}>
+              <AIInputModelSelectTrigger>
+                <AIInputModelSelectValue />
+              </AIInputModelSelectTrigger>
+              <AIInputModelSelectContent>
+                {models.map((model) => (
+                  <AIInputModelSelectItem key={model.id} value={model.id}>
+                    {model.name}
+                  </AIInputModelSelectItem>
+                ))}
+              </AIInputModelSelectContent>
+            </AIInputModelSelect>
+          </AIInputTools>
+          <AIInputSubmit disabled={!input.trim()} />
+        </AIInputToolbar>
+      </AIInput>
+    </div>
   );
 }

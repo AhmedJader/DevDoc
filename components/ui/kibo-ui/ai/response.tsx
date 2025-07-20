@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   type BundledLanguage,
@@ -16,42 +16,42 @@ import {
   CodeBlockSelectItem,
   CodeBlockSelectTrigger,
   CodeBlockSelectValue,
-} from '@repo/code-block';
-import type { HTMLAttributes } from 'react';
-import { memo } from 'react';
-import ReactMarkdown, { type Options } from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import { cn } from '/lib/utils';
+} from "@/components/ui/kibo-ui/code-block/index";
+import type { HTMLAttributes } from "react";
+import { memo } from "react";
+import ReactMarkdown, { type Options } from "react-markdown";
+import remarkGfm from "remark-gfm";
+import { cn } from "@/lib/utils";
 
 export type AIResponseProps = HTMLAttributes<HTMLDivElement> & {
   options?: Options;
-  children: Options['children'];
+  children: Options["children"];
 };
 
-const components: Options['components'] = {
+const components: Options["components"] = {
   ol: ({ node, children, className, ...props }) => (
-    <ol className={cn('ml-4 list-outside list-decimal', className)} {...props}>
+    <ol className={cn("ml-4 list-outside list-decimal", className)} {...props}>
       {children}
     </ol>
   ),
   li: ({ node, children, className, ...props }) => (
-    <li className={cn('py-1', className)} {...props}>
+    <li className={cn("py-1", className)} {...props}>
       {children}
     </li>
   ),
   ul: ({ node, children, className, ...props }) => (
-    <ul className={cn('ml-4 list-outside list-decimal', className)} {...props}>
+    <ul className={cn("ml-4 list-outside list-decimal", className)} {...props}>
       {children}
     </ul>
   ),
   strong: ({ node, children, className, ...props }) => (
-    <span className={cn('font-semibold', className)} {...props}>
+    <span className={cn("font-semibold", className)} {...props}>
       {children}
     </span>
   ),
   a: ({ node, children, className, ...props }) => (
     <a
-      className={cn('font-medium text-primary underline', className)}
+      className={cn("font-medium text-primary underline", className)}
       rel="noreferrer"
       target="_blank"
       {...props}
@@ -61,7 +61,7 @@ const components: Options['components'] = {
   ),
   h1: ({ node, children, className, ...props }) => (
     <h1
-      className={cn('mt-6 mb-2 font-semibold text-3xl', className)}
+      className={cn("mt-6 mb-2 font-semibold text-3xl", className)}
       {...props}
     >
       {children}
@@ -69,63 +69,63 @@ const components: Options['components'] = {
   ),
   h2: ({ node, children, className, ...props }) => (
     <h2
-      className={cn('mt-6 mb-2 font-semibold text-2xl', className)}
+      className={cn("mt-6 mb-2 font-semibold text-2xl", className)}
       {...props}
     >
       {children}
     </h2>
   ),
   h3: ({ node, children, className, ...props }) => (
-    <h3 className={cn('mt-6 mb-2 font-semibold text-xl', className)} {...props}>
+    <h3 className={cn("mt-6 mb-2 font-semibold text-xl", className)} {...props}>
       {children}
     </h3>
   ),
   h4: ({ node, children, className, ...props }) => (
-    <h4 className={cn('mt-6 mb-2 font-semibold text-lg', className)} {...props}>
+    <h4 className={cn("mt-6 mb-2 font-semibold text-lg", className)} {...props}>
       {children}
     </h4>
   ),
   h5: ({ node, children, className, ...props }) => (
     <h5
-      className={cn('mt-6 mb-2 font-semibold text-base', className)}
+      className={cn("mt-6 mb-2 font-semibold text-base", className)}
       {...props}
     >
       {children}
     </h5>
   ),
   h6: ({ node, children, className, ...props }) => (
-    <h6 className={cn('mt-6 mb-2 font-semibold text-sm', className)} {...props}>
+    <h6 className={cn("mt-6 mb-2 font-semibold text-sm", className)} {...props}>
       {children}
     </h6>
   ),
   pre: ({ node, className, children }) => {
-    let language = 'javascript';
+    let language = "javascript";
 
-    if (typeof node?.properties?.className === 'string') {
-      language = node.properties.className.replace('language-', '');
+    if (typeof node?.properties?.className === "string") {
+      language = node.properties.className.replace("language-", "");
     }
 
     const childrenIsCode =
-      typeof children === 'object' &&
+      typeof children === "object" &&
       children !== null &&
-      'type' in children &&
-      children.type === 'code';
+      "type" in children &&
+      children.type === "code";
 
     if (!childrenIsCode) {
       return <pre>{children}</pre>;
     }
 
-    const data: CodeBlockProps['data'] = [
+    const data: CodeBlockProps["data"] = [
       {
         language,
-        filename: 'index.js',
+        filename: "index.js",
         code: (children.props as { children: string }).children,
       },
     ];
 
     return (
       <CodeBlock
-        className={cn('my-4 h-auto', className)}
+        className={cn("my-4 h-auto", className)}
         data={data}
         defaultValue={data[0].language}
       >
@@ -150,8 +150,8 @@ const components: Options['components'] = {
             </CodeBlockSelectContent>
           </CodeBlockSelect>
           <CodeBlockCopyButton
-            onCopy={() => console.log('Copied code to clipboard')}
-            onError={() => console.error('Failed to copy code to clipboard')}
+            onCopy={() => console.log("Copied code to clipboard")}
+            onError={() => console.error("Failed to copy code to clipboard")}
           />
         </CodeBlockHeader>
         <CodeBlockBody>
@@ -172,7 +172,7 @@ export const AIResponse = memo(
   ({ className, options, children, ...props }: AIResponseProps) => (
     <div
       className={cn(
-        'size-full [&>*:first-child]:mt-0 [&>*:last-child]:mb-0',
+        "size-full [&>*:first-child]:mt-0 [&>*:last-child]:mb-0",
         className
       )}
       {...props}

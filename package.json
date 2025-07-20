@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@icons-pack/react-simple-icons": "^13.5.0",
+    "@radix-ui/react-avatar": "^1.1.10",
     "@radix-ui/react-collapsible": "^1.1.11",
     "@radix-ui/react-scroll-area": "^1.2.9",
     "@radix-ui/react-select": "^2.2.5",
@@ -20,6 +21,7 @@
     "clsx": "^2.1.1",
     "lucide-react": "^0.525.0",
     "next": "15.4.2",
+    "next-themes": "^0.4.6",
     "openai": "^5.10.1",
     "react": "19.1.0",
     "react-dom": "19.1.0",

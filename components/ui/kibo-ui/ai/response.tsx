@@ -141,7 +141,7 @@ const components: Options["components"] = {
               </CodeBlockFilename>
             )}
           </CodeBlockFiles>
-          <CodeBlockSelect>
+          {/* <CodeBlockSelect>
             <CodeBlockSelectTrigger>
               <CodeBlockSelectValue />
             </CodeBlockSelectTrigger>
@@ -152,7 +152,7 @@ const components: Options["components"] = {
                 </CodeBlockSelectItem>
               )}
             </CodeBlockSelectContent>
-          </CodeBlockSelect>
+          </CodeBlockSelect> */}
           <CodeBlockCopyButton
             onCopy={() => console.log("Copied code to clipboard")}
             onError={() => console.error("Failed to copy code to clipboard")}

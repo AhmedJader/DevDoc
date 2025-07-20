@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="1280" height="720" alt="Frame 134" src="https://github.com/user-attachments/assets/0ec1b966-593f-4d7b-b8f2-1a80c3a389ed" />
+  <img width="1280" height="720" alt="Frame 134" src="https://raw.githubusercontent.com/AhmedJader/ht6/refs/heads/main/assets/hero.png" />
 </p>
 
 <h1 align="center">DevDoc</h1>

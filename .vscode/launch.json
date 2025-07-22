@@ -7,8 +7,7 @@
       "request": "launch",
       "args": ["--extensionDevelopmentPath=${workspaceFolder}/extension"],
       "outFiles": ["${workspaceFolder}/extension/out/**/*.js"],
-      "preLaunchTask": "npm: watch",
-      "envFile": "${workspaceFolder}/.env.local"
+      "preLaunchTask": "npm: watch"
     }
   ]
 }

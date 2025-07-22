@@ -77,8 +77,3 @@ DevDoc is a VS Code extension that combines OpenAI’s GPT-4o with **real-time d
 2. Search for `DevDoc`
 3. Click **Install**
 
-
-
-### 📝 License
-
-This project is licensed under the **MIT License**. See the [LICENSE](URL_TO_LICENSE) file for details.

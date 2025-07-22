@@ -1,6 +1,7 @@
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs";
+import * as dotenv from "dotenv";
 
 // Use a 'require' statement for 'node-fetch' to ensure CommonJS compatibility,
 // which is required for VS Code extensions.
@@ -10,12 +11,19 @@ const fetch = require("node-fetch");
 // Import the Response type for better type-checking of the fetch response.
 const { Response } = require("node-fetch");
 
-/**
- * !!! IMPORTANT !!!
- * This URL points to your local development server.
- * When you deploy, change this to your actual Vercel application URL.
- */
-const VERCEL_BACKEND_URL = `http://localhost:3000/api/chat`;
+// The rest of your logic remains EXACTLY THE SAME.
+const isProduction = process.env.NODE_ENV === "production";
+const BACKEND_URL = isProduction
+  ? process.env.API_URL_PROD
+  : process.env.API_URL_DEV;
+
+if (!BACKEND_URL) {
+  // If the URL is not defined for any reason, show an error and stop.
+  vscode.window.showErrorMessage(
+    "Backend API URL is not configured. Please check the .env file."
+  );
+  throw new Error("API URL not configured.");
+}
 
 /**
  * This function is called when your extension is activated.
@@ -92,7 +100,7 @@ class DevDocViewProvider implements vscode.WebviewViewProvider {
         try {
           // Use node-fetch to make a POST request to your Vercel/local backend.
           // This runs in a Node.js environment, so it is NOT subject to CORS.
-          const res: typeof Response = await fetch(VERCEL_BACKEND_URL, {
+          const res: typeof Response = await fetch(BACKEND_URL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ messages, model }),

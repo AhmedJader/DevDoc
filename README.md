@@ -19,9 +19,9 @@
     <img src="https://img.shields.io/visual-studio-marketplace/v/dev-doc.dev-doc?style=for-the-badge&label=VS%20Marketplace&color=blue" alt="VS Code Marketplace Version">
   </a>
 
-  <!-- VS Code Marketplace Stars -->
+ <!-- VS Code Marketplace Rating -->
   <a href="https://marketplace.visualstudio.com/items?itemName=dev-doc.dev-doc">
-    <img src="https://img.shields.io/visual-studio-marketplace/stars/dev-doc.dev-doc?style=for-the-badge&color=brightgreen" alt="Marketplace Rating">
+    <img src="https://img.shields.io/badge/RAG-Enabled-brightgreen?style=for-the-badge&logo=brain&logoColor=white" alt="RAG-based AI">
   </a>
 
   <!-- GitHub Actions CI Status (customize USERNAME and REPO) -->

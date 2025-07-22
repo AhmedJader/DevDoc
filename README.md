@@ -5,6 +5,11 @@
 <h1 align="center">DevDoc</h1>
 
 <p align="center">
+  <a href="https://devdoc-ai.vercel.app/" target="_blank"><strong>🚀 VISIT THE LANDING PAGE</strong></a>
+</p>
+
+
+<p align="center">
   <strong>Stop writing outdated code. DevDoc is a VS Code extension that ensures your AI-generated code is always correct and secure by using a real-time documentation vector store.</strong>
 </p>
 

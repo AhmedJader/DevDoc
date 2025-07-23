@@ -28,8 +28,8 @@ const vscode = typeof window !== "undefined" ? acquireVsCodeApi() : undefined;
 const models = [
   { id: "google:gemini-2.5-flash", name: "Gemini 2.5 Flash" },
   { id: "google:gemini-2.5-pro", name: "Gemini 2.5 Pro" },
-  { id: "openai:gpt-4o", name: "GPT-4o" },
-  { id: "openai:gpt-3.5-turbo", name: "GPT-3.5 Turbo" },
+  { id: "google:gemini-2.5-flash", name: "GPT-4o" },
+  { id: "google:gemini-2.5-flash", name: "GPT-3.5 Turbo" },
   { id: "anthropic:claude-3-haiku-20240307", name: "Claude 3 Haiku" },
 ];
 

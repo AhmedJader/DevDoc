@@ -1,10 +1,62 @@
 {
-  "name": "ht6-extension",
-  "version": "0.0.1",
-  "main": "out/extension.js",
-  "scripts": {
-    "compile": "tsc",
-    "watch": "tsc -w"
+  "name": "dev-doc",
+  "displayName": "DevDoc - AI with Up-to-Date Docs",
+  "description": "Stop writing outdated code. DevDoc is a VS Code extension that ensures your AI-generated code is always correct and secure by using a real-time documentation vector store.",
+  "version": "0.0.3",
+  "publisher": "dev-doc",
+  "license": "MIT",
+  "author": {
+    "name": "Ahmed Abdul Jader",
+    "email": "ahmedjader837@gmail.com"
+  },
+  "contributors": [
+    {
+      "name": "Aman Meherally",
+      "email": "amanmeherally@gmail.com"
+    },
+    {
+      "name": "Mahad Hassan",
+      "email": "mahadhassan375@gmail.com"
+    },
+    {
+      "name": "Hala Alshareef",
+      "email": "alshareefhala10@gmail.com"
+    }
+  ],
+  "homepage": "https://github.com/AhmedJader/DevDoc#readme",
+  "bugs": {
+    "url": "https://github.com/AhmedJader/DevDoc/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AhmedJader/DevDoc.git"
+  },
+  "icon": "media/icon.png",
+  "categories": [
+    "AI",
+    "Azure",
+    "Chat",
+    "Data Science",
+    "Debuggers",
+    "Extension Packs",
+    "Education",
+    "Formatters",
+    "Keymaps",
+    "Language Packs",
+    "Linters",
+    "Machine Learning",
+    "Notebooks",
+    "Programming Languages",
+    "SCM Providers",
+    "Snippets",
+    "Testing",
+    "Themes",
+    "Visualization",
+    "Other"
+  ],
+  "galleryBanner": {
+    "color": "#2c3e50",
+    "theme": "dark"
   },
   "engines": {
     "vscode": "^1.75.0"
@@ -12,29 +64,39 @@
   "activationEvents": [
     "onView:devdoc.panel"
   ],
+  "main": "./out/extension.js",
   "contributes": {
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "devdoc",
+          "id": "devdoc-container",
           "title": "DevDoc",
           "icon": "media/icon.svg"
         }
       ]
     },
     "views": {
-      "devdoc": [
+      "devdoc-container": [
         {
           "id": "devdoc.panel",
           "name": "DevDoc",
-          "type": "webview"
+          "type": "webview",
+          "icon": "media/icon.svg"
         }
       ]
     }
   },
+  "scripts": {
+    "vscode:prepublish": "npm run compile-prod",
+    "compile-prod": "cross-env NODE_ENV=production node ./esbuild.js",
+    "compile": "cross-env NODE_ENV=development node ./esbuild.js",
+    "watch": "cross-env NODE_ENV=development node ./esbuild.js --watch"
+  },
   "devDependencies": {
     "@types/node": "^20",
     "@types/vscode": "^1.75.0",
+    "cross-env": "^7.0.3",
+    "esbuild": "^0.25.8",
     "typescript": "^5"
   },
   "dependencies": {

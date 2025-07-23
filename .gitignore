@@ -30,8 +30,12 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
+# vsix
+*.vsix
+
 # env files (can opt-in for committing if needed)
 .env*
+.publisher
 
 # vercel
 .vercel

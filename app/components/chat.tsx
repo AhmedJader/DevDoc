@@ -26,16 +26,23 @@ import userImage from "@/app/components/assets/user.png";
 const vscode = typeof window !== "undefined" ? acquireVsCodeApi() : undefined;
 
 const models = [
-  { id: "google:gemini-2.5-flash", name: "Gemini 2.5 Flash" },
-  { id: "google:gemini-2.5-pro", name: "Gemini 2.5 Pro" },
-  { id: "google:gemini-2.5-flash", name: "GPT-4o" },
-  { id: "google:gemini-2.5-flash", name: "GPT-3.5 Turbo" },
-  { id: "anthropic:claude-3-haiku-20240307", name: "Claude 3 Haiku" },
+  { id: 0, modelId: "google:gemini-2.5-flash", name: "Gemini 2.5 Pro" },
+  { id: 1, modelId: "google:gemini-2.5-flash", name: "Gemini 2.5 Flash" },
+  { id: 2, modelId: "google:gemini-2.5-flash", name: "Claude Sonnet 3.5" },
+  { id: 3, modelId: "google:gemini-2.5-flash", name: "Claude Sonnet 3.7" },
+  {
+    id: 4,
+    modelId: "google:gemini-2.5-flash",
+    name: "Claude Sonnet 3.7 Thinking",
+  },
+  { id: 5, modelId: "google:gemini-2.5-flash", name: "Claude Sonnet 4" },
+  { id: 6, modelId: "google:gemini-2.5-flash", name: "GPT-4o" },
+  { id: 7, modelId: "google:gemini-2.5-flash", name: "GPT-3.5 Turbo" },
 ];
 
 export default function Chat() {
   const [input, setInput] = useState("");
-  const [model, setModel] = useState("openai:gpt-4o");
+  const [model, setModel] = useState<number>(0);
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -350,13 +357,26 @@ export default function Chat() {
             <AIInputButton>
               <PlusIcon size={16} />
             </AIInputButton>
-            <AIInputModelSelect onValueChange={setModel} value={model}>
+            <AIInputModelSelect
+              onValueChange={(modelName) => {
+                const selectedModel = models.find(
+                  (m) => m.id === Number(modelName)
+                );
+                if (selectedModel) {
+                  setModel(selectedModel.id);
+                }
+              }}
+              value={String(model)}
+            >
               <AIInputModelSelectTrigger>
                 <AIInputModelSelectValue />
               </AIInputModelSelectTrigger>
               <AIInputModelSelectContent>
                 {models.map((model) => (
-                  <AIInputModelSelectItem key={model.id} value={model.id}>
+                  <AIInputModelSelectItem
+                    key={model.id}
+                    value={String(model.id)}
+                  >
                     {model.name}
                   </AIInputModelSelectItem>
                 ))}

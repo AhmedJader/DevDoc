@@ -2,7 +2,7 @@
   "name": "dev-doc",
   "displayName": "DevDoc - AI with Up-to-Date Docs",
   "description": "Stop writing outdated code. DevDoc is a VS Code extension that ensures your AI-generated code is always correct and secure by using a real-time documentation vector store.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "publisher": "dev-doc",
   "license": "MIT",
   "author": {
